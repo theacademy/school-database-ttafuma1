@@ -49,7 +49,8 @@ public class SchoolDaoImpl implements SchoolDao {
         // for all courses in the Computer Science department.
         // YOUR CODE STARTS HERE
 
-         String sql = "SELECT c.courseCode AS COURSECODE, c.courseDesc AS COURSEDESC FROM course c JOIN teacher t ON c.teacherId = t.tid WHERE t.dept = 'Computer Science'";
+         String sql = "SELECT c.courseCode AS COURSECODE, c.courseDesc AS COURSEDESC FROM course c JOIN teacher t " +
+                 "ON c.teacherId = t.tid WHERE t.dept = 'Computer Science'";
 
         // YOUR CODE ENDS HERE
         return jdbcTemplate.query(sql, new CourseMapper());
@@ -74,7 +75,9 @@ public class SchoolDaoImpl implements SchoolDao {
         // Name the aggregate field `numStudents`.
         // YOUR CODE STARTS HERE
 
-        String sql = "SELECT c.courseCode AS COURSECODE, COUNT(cs.student_id) AS NUMSTUDENTS FROM course c JOIN teacher t ON c.teacherId = t.tid INNER JOIN course_student cs ON c.cid = cs.course_id WHERE t.dept = 'Computer Science' GROUP BY c.courseCode ORDER BY c.courseCode LIMIT 7";
+        String sql = "SELECT c.courseCode AS COURSECODE, COUNT(cs.student_id) AS NUMSTUDENTS FROM course c JOIN " +
+                "teacher t ON c.teacherId = t.tid INNER JOIN course_student cs ON c.cid = cs.course_id " +
+                "WHERE t.dept = 'Computer Science' GROUP BY c.courseCode ORDER BY c.courseCode LIMIT 7";
 
         // YOUR CODE ENDS HERE
         return jdbcTemplate.query(sql, new StudentCountMapper());
@@ -101,7 +104,8 @@ public class SchoolDaoImpl implements SchoolDao {
         // You will need to include a sid in your query.  Use 123
         // YOUR CODE STARTS HERE
 
-        String sql = "INSERT INTO course_student (course_id, student_id) SELECT cid, 123 FROM course WHERE courseCode = 'CS148'";
+        String sql = "INSERT INTO course_student (course_id, student_id) SELECT cid, 123 FROM course " +
+                "WHERE courseCode = 'CS148'";
 
         // YOUR CODE ENDS HERE
         jdbcTemplate.update(sql);
